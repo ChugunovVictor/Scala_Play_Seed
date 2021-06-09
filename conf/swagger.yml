@@ -1,0 +1,9 @@
+---
+swagger: "2.0"
+info:
+  title: "Operations with a products"
+  description: "Galvanize"
+consumes:
+  - application/json
+produces:
+  - application/json

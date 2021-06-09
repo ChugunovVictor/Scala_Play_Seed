@@ -1,0 +1,80 @@
+### NoDocs ###
+GET     /                           controllers.HomeController.index()
+
+### NoDocs ###
+GET     /docs                       controllers.HomeController.redirectDocs()
+
+###
+# summary: List the most viewed products
+# parameters:
+#  - name: "currency"
+#    in: "query"
+#    description: "Currency abbreviation - for example: USD / CAD / EUR / GBP"
+#    required: false
+#    type: "string"
+#  - name: "count"
+#    in: "query"
+#    description: "Number of products to return"
+#    required: false
+#    type: "number"
+# responses:
+#   200:
+#     schema:
+#       $ref: '#/definitions/dtos.ProductViewDTO'
+###
+GET     /products                    controllers.ProductController.getProducts(currency: String ?= "USD", count: Int ?= 5)
+
+###
+# summary: Create a new product
+# parameters:
+#  - name: body
+#    description: "The name, price and description (optional) of the product. The price is assumed in USD."
+#    schema:
+#      $ref: '#/definitions/dtos.ProductCreateDTO'
+# responses:
+#   200:
+#     description: "Success message"
+#   400:
+#     description: "Error message"
+###
+POST    /products                    controllers.ProductController.addProduct
+
+###
+# summary: Get a single product
+# parameters:
+#  - name: "id"
+#    in: "path"
+#    description: "Requested product id"
+#    required: true
+#    type: "number"
+# responses:
+#   200:
+#     schema:
+#       $ref: '#/definitions/dtos.ProductViewDTO'
+#   400:
+#     description: "Error message"
+###
+GET     /products/:id                controllers.ProductController.getProduct(id: Long)
+#PUT    /products/:id
+
+###
+# summary: Delete a product
+# parameters:
+#  - name: "id"
+#    in: "path"
+#    description: "Product id. Product will be archived"
+#    required: true
+#    type: "number"
+# responses:
+#   200:
+#     description: "Success message"
+#   400:
+#     description: "Error message"
+###
+DELETE  /products/:id                controllers.ProductController.deleteProduct(id: Long)
+
+### NoDocs ###
+GET   /docs/swagger-ui/*file        controllers.Assets.at(path:String="/public/lib/swagger-ui", file:String)
+
+### NoDocs ###
+GET   /assets/*file                 controllers.Assets.versioned(path="/public", file: Asset)
